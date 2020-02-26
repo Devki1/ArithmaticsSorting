@@ -17,19 +17,32 @@ arithmaticDictionary[4]=$number4
 for value in ${!arithmaticDictionary[@]}
 do	
 		arithmaticArray[$value]="${arithmaticDictionary[$value]}"
-
 done
+#Store the array value in decending order
 for((value=1;value<=4;value++))
 do
-	for((value1=$((value+1));value1<=4;value1++))
+	for((value1=$((value));value1<=4;value1++))
 	do
 		if((`echo "${arithmaticArray[$value]}<${arithmaticArray[$value1]}" | bc -q`==1))
 		then
-			temp="$arithmaticArray[$value]"
+			temp="${arithmaticArray[$value]}"
 			arithmaticArray[$value]="${arithmaticArray[$value1]}"
 			arithmaticArray[$value1]=$temp
 		fi
 	done
 done
 echo "sortedArray decending order:" ${arithmaticArray[@]}
-	
+#Store the array value in ascending order
+for((value=1;value<=4;value++))
+do
+	for((value1=$((value+1));value1<=4;value1++))
+	do
+		if((`echo "${arithmaticArray[$value]}>${arithmaticArray[$value1]}" | bc -q`==1))
+		then
+			temp="${arithmaticArray[$value1]}"
+			arithmaticArray[$value1]="${arithmaticArray[$value]}"
+			arithmaticArray[$value]=$temp
+		fi
+	done
+done
+echo "sortedArray ascending order:"${arithmaticArray[@]}
