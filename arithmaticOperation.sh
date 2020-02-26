@@ -19,3 +19,17 @@ do
 		arithmaticArray[$value]="${arithmaticDictionary[$value]}"
 
 done
+for((value=1;value<=4;value++))
+do
+	for((value1=$((value+1));value1<=4;value1++))
+	do
+		if((`echo "${arithmaticArray[$value]}<${arithmaticArray[$value1]}" | bc -q`==1))
+		then
+			temp="$arithmaticArray[$value]"
+			arithmaticArray[$value]="${arithmaticArray[$value1]}"
+			arithmaticArray[$value1]=$temp
+		fi
+	done
+done
+echo "sortedArray decending order:" ${arithmaticArray[@]}
+	
