@@ -13,5 +13,9 @@ number3=`echo "scale=2 ; $c + $a / $b " | bc -l`
 arithmaticDictionary[3]=$number3
 number4=`echo "scale=2 ; $a % $b + $c " | bc -l`
 arithmaticDictionary[4]=$number4
+#Store the element of dictionay in an array
+for value in ${!arithmaticDictionary[@]}
+do	
+		arithmaticArray[$value]="${arithmaticDictionary[$value]}"
 
-
+done
